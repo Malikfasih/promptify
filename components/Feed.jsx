@@ -18,6 +18,7 @@ const PromptCardList = ({ data, handleTagClick }) => {
   );
 };
 
+export const revalidate = 30;
 const Feed = () => {
   const [allPosts, setAllPosts] = useState([]);
 
@@ -34,6 +35,7 @@ const Feed = () => {
     setAllPosts(data);
   };
   console.log("allPosts state -->", allPosts);
+
   useEffect(() => {
     fetchPosts();
   }, []);
