@@ -28,7 +28,11 @@ const Feed = () => {
   const [searchedResults, setSearchedResults] = useState([]);
 
   const fetchPosts = async () => {
-    const response = await fetch("/api/prompt");
+    const response = await fetch("/api/prompt", {
+      headers: {
+        "Cache-Control": "no-cache",
+      },
+    });
     const data = await response.json();
     console.log("all fetching prompts -->", data);
 
