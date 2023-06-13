@@ -6,7 +6,10 @@ export const GET = async ({ request, response }) => {
     await connectToDB();
 
     const prompts = await Prompt.find({}).populate("creator");
-    response.setHeader("Cache-Control", "no-cache");
+    response.setHeader(
+      "Cache-Control",
+      "public, s-maxage=10, stale-while-revalidate=59"
+    );
     response.status(200).json(prompts);
     // return new Response(JSON.stringify(prompts), { status: 200 });
   } catch (error) {
