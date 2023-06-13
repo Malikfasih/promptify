@@ -8,7 +8,7 @@ import PromptCard from "./PromptCard";
 const PromptCardList = ({ data, handleTagClick }) => {
   return (
     <div className="mt-16 prompt_layout">
-      {data.map((post) => (
+      {data?.map((post) => (
         <PromptCard
           key={post._id}
           post={post}
@@ -28,39 +28,19 @@ const Feed = () => {
   const [searchTimeout, setSearchTimeout] = useState(null);
   const [searchedResults, setSearchedResults] = useState([]);
 
-  // const fetchPosts = async () => {
-  //   const response = await fetch("/api/prompt", {
-  //     headers: {
-  //       "Cache-Control": "no-cache",
-  //     },
-  //   });
-  //   const data = await response.json();
-  //   console.log("all fetching prompts -->", data);
-
-  //   setAllPosts(data);
-  // };
-  // console.log("allPosts state -->", allPosts);
-
   const fetchPosts = async () => {
-    try {
-      const response = await fetch("/api/prompt", {
-        headers: {
-          "Cache-Control": "no-cache",
-        },
-      });
+    // const { data } = await fetch("/api/prompt");
+    const response = await fetch("/api/prompt", {
+      headers: {
+        "Cache-Control": "no-cache",
+      },
+    });
+    const data = await response.json();
+    console.log("all fetching prompts -->", data);
 
-      if (!response.ok) {
-        throw new Error("Failed to fetch prompts");
-      }
-
-      const data = await response.json();
-      console.log("all fetching prompts -->", data);
-      setAllPosts(data);
-    } catch (error) {
-      console.error("Error fetching prompts:", error);
-      // Handle the error appropriately (e.g., show an error message to the user)
-    }
+    setAllPosts(data);
   };
+  console.log("allPosts state -->", allPosts);
 
   useEffect(() => {
     fetchPosts();
