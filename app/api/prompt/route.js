@@ -13,7 +13,7 @@ export const GET = async ({ request, response }) => {
     response.status(200).json(prompts);
     // return new Response(JSON.stringify(prompts), { status: 200 });
   } catch (error) {
-    console.error("this is an error", error);
+    console.log("this is an error", error);
     return new Response("Failed to fetch all prompts", { status: 500 });
   }
 };
