@@ -6,7 +6,6 @@ export const GET = async (request) => {
     await connectToDB();
 
     const prompts = await Prompt.find({}).populate("creator");
-    // response.status(200).json(prompts);
     return new Response(JSON.stringify(prompts), { status: 200 });
   } catch (error) {
     console.log("this is an error", error);
